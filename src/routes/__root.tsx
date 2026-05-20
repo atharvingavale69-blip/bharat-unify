@@ -76,7 +76,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "A disciplined, command-grade civic platform for the citizens of Bharat. Truth. Discipline. Bharat.",
       },
       { name: "theme-color", content: "#0a0a0a" },
-      { property: "og:title", content: "RLHS — Truth. Discipline. Bharat." },
+      { property: "og:title", content: "RLHS — Rashtriya Lok Hit Sangathan" },
       {
         property: "og:description",
         content:
@@ -84,6 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "RLHS — Rashtriya Lok Hit Sangathan" },
+      { name: "description", content: "Bharat Unify is a full-stack political movement platform for truth-driven discussions and youth empowerment." },
+      { property: "og:description", content: "Bharat Unify is a full-stack political movement platform for truth-driven discussions and youth empowerment." },
+      { name: "twitter:description", content: "Bharat Unify is a full-stack political movement platform for truth-driven discussions and youth empowerment." },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
