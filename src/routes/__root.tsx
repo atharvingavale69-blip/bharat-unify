@@ -88,6 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Bharat Unify is a full-stack political movement platform for truth-driven discussions and youth empowerment." },
       { property: "og:description", content: "Bharat Unify is a full-stack political movement platform for truth-driven discussions and youth empowerment." },
       { name: "twitter:description", content: "Bharat Unify is a full-stack political movement platform for truth-driven discussions and youth empowerment." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cd206557-3cb3-49a3-ac63-021b7be953ca/id-preview-62c3bb35--667c4df6-f1a8-4e68-a259-d583a9a4547d.lovable.app-1779304680657.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cd206557-3cb3-49a3-ac63-021b7be953ca/id-preview-62c3bb35--667c4df6-f1a8-4e68-a259-d583a9a4547d.lovable.app-1779304680657.png" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
