@@ -1,14 +1,10 @@
 /* eslint-disable */
-
 // @ts-nocheck
-
-// noinspection JSUnusedGlobalSymbols
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ForumIndexRouteImport } from './routes/forum.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminForumRouteImport } from './routes/admin.forum'
@@ -29,12 +25,6 @@ const AdminRoute = AdminRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-
-const ForumIndexRoute = ForumIndexRouteImport.update({
-  id: '/forum/',
-  path: '/forum/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -62,155 +52,7 @@ const AdminAuditRoute = AdminAuditRouteImport.update({
   getParentRoute: () => AdminRoute,
 } as any)
 
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/admin/audit': typeof AdminAuditRoute
-  '/admin/forum': typeof AdminForumRoute
-  '/admin/users': typeof AdminUsersRoute
-  '/admin/': typeof AdminIndexRoute
-  '/forum/': typeof ForumIndexRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/admin/audit': typeof AdminAuditRoute
-  '/admin/forum': typeof AdminForumRoute
-  '/admin/users': typeof AdminUsersRoute
-  '/admin': typeof AdminIndexRoute
-  '/forum': typeof ForumIndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/admin/audit': typeof AdminAuditRoute
-  '/admin/forum': typeof AdminForumRoute
-  '/admin/users': typeof AdminUsersRoute
-  '/admin/': typeof AdminIndexRoute
-  '/forum/': typeof ForumIndexRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/admin'
-    | '/auth'
-    | '/admin/audit'
-    | '/admin/forum'
-    | '/admin/users'
-    | '/admin/'
-    | '/forum/'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/auth'
-    | '/admin/audit'
-    | '/admin/forum'
-    | '/admin/users'
-    | '/admin'
-    | '/forum'
-  id:
-    | '__root__'
-    | '/'
-    | '/admin'
-    | '/auth'
-    | '/admin/audit'
-    | '/admin/forum'
-    | '/admin/users'
-    | '/admin/'
-    | '/forum/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRouteWithChildren
-  AuthRoute: typeof AuthRoute
-  ForumIndexRoute: typeof ForumIndexRoute
-}
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-
-    '/forum/': {
-      id: '/forum/'
-      path: '/forum'
-      fullPath: '/forum/'
-      preLoaderRoute: typeof ForumIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
-    }
-
-    '/admin/users': {
-      id: '/admin/users'
-      path: '/users'
-      fullPath: '/admin/users'
-      preLoaderRoute: typeof AdminUsersRouteImport
-      parentRoute: typeof AdminRoute
-    }
-
-    '/admin/forum': {
-      id: '/admin/forum'
-      path: '/forum'
-      fullPath: '/admin/forum'
-      preLoaderRoute: typeof AdminForumRouteImport
-      parentRoute: typeof AdminRoute
-    }
-
-    '/admin/audit': {
-      id: '/admin/audit'
-      path: '/audit'
-      fullPath: '/admin/audit'
-      preLoaderRoute: typeof AdminAuditRouteImport
-      parentRoute: typeof AdminRoute
-    }
-  }
-}
-
-interface AdminRouteChildren {
-  AdminAuditRoute: typeof AdminAuditRoute
-  AdminForumRoute: typeof AdminForumRoute
-  AdminUsersRoute: typeof AdminUsersRoute
-  AdminIndexRoute: typeof AdminIndexRoute
-}
-
-const AdminRouteChildren: AdminRouteChildren = {
+const AdminRouteChildren = {
   AdminAuditRoute,
   AdminForumRoute,
   AdminUsersRoute,
@@ -220,16 +62,14 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren =
   AdminRoute._addFileChildren(AdminRouteChildren)
 
-const rootRouteChildren: RootRouteChildren = {
+const rootRouteChildren = {
   IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   AuthRoute,
-  ForumIndexRoute,
 }
 
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
 import type { startInstance } from './start.ts'
