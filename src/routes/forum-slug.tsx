@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 
-export const Route = createFileRoute("/forum/$slug")({
+export const Route = createFileRoute("/forum-slug")({
   component: CategoryPage,
 });
 

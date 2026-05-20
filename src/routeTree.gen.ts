@@ -9,16 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ForumSlugRouteImport } from './routes/forum-slug'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ForumIndexRouteImport } from './routes/forum.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as ForumSlugRouteImport } from './routes/forum.$slug'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminForumRouteImport } from './routes/admin.forum'
 import { Route as AdminAuditRouteImport } from './routes/admin.audit'
 
+const ForumSlugRoute = ForumSlugRouteImport.update({
+  id: '/forum-slug',
+  path: '/forum-slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -44,11 +49,6 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const ForumSlugRoute = ForumSlugRouteImport.update({
-  id: '/forum/$slug',
-  path: '/forum/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -69,20 +69,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
+  '/forum-slug': typeof ForumSlugRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/forum': typeof AdminForumRoute
   '/admin/users': typeof AdminUsersRoute
-  '/forum/$slug': typeof ForumSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/forum/': typeof ForumIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/forum-slug': typeof ForumSlugRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/forum': typeof AdminForumRoute
   '/admin/users': typeof AdminUsersRoute
-  '/forum/$slug': typeof ForumSlugRoute
   '/admin': typeof AdminIndexRoute
   '/forum': typeof ForumIndexRoute
 }
@@ -91,10 +91,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
+  '/forum-slug': typeof ForumSlugRoute
   '/admin/audit': typeof AdminAuditRoute
   '/admin/forum': typeof AdminForumRoute
   '/admin/users': typeof AdminUsersRoute
-  '/forum/$slug': typeof ForumSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/forum/': typeof ForumIndexRoute
 }
@@ -104,20 +104,20 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/forum-slug'
     | '/admin/audit'
     | '/admin/forum'
     | '/admin/users'
-    | '/forum/$slug'
     | '/admin/'
     | '/forum/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/forum-slug'
     | '/admin/audit'
     | '/admin/forum'
     | '/admin/users'
-    | '/forum/$slug'
     | '/admin'
     | '/forum'
   id:
@@ -125,10 +125,10 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/forum-slug'
     | '/admin/audit'
     | '/admin/forum'
     | '/admin/users'
-    | '/forum/$slug'
     | '/admin/'
     | '/forum/'
   fileRoutesById: FileRoutesById
@@ -143,6 +143,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/forum-slug': {
+      id: '/forum-slug'
+      path: '/forum-slug'
+      fullPath: '/forum-slug'
+      preLoaderRoute: typeof ForumSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -177,13 +184,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
-    }
-    '/forum/$slug': {
-      id: '/forum/$slug'
-      path: '/forum/$slug'
-      fullPath: '/forum/$slug'
-      preLoaderRoute: typeof ForumSlugRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/admin/users': {
       id: '/admin/users'
