@@ -67,7 +67,7 @@ function Home() {
         </p>
 
         <h1 className="text-6xl font-black tracking-tight md:text-8xl">
-          RLHS
+          Rashtriya Laal Hit Sangh
         </h1>
 
         <div className="mt-5 h-1 w-32 rounded-full bg-red-600" />
