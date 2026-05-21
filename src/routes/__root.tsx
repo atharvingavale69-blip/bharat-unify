@@ -13,7 +13,6 @@ import { useEffect } from "react";
 import appCss from "../styles.css?url";
 import { store } from "@/store";
 import { AuthProvider } from "@/hooks/use-auth";
-import "@/lib/i18n";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 
