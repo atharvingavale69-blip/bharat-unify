@@ -1,66 +1,82 @@
 import { Link } from "@tanstack/react-router";
-import { Shield, Instagram, Github, Globe } from "lucide-react";
+import {
+  Shield,
+  Instagram,
+  Github,
+  Globe,
+  ArrowUpRight,
+} from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="relative mt-32 overflow-hidden border-t border-zinc-900 bg-black">
+    <footer className="relative overflow-hidden border-t border-white/5 bg-black">
 
-      {/* Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(220,38,38,0.12),transparent_70%)]" />
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(249,115,22,0.12),transparent_65%)]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
+      {/* Grid Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:70px_70px]" />
 
-        <div className="grid gap-14 md:grid-cols-4">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20">
 
-          {/* Branding */}
-          <div className="md:col-span-2">
+        {/* Top */}
+        <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr_1fr]">
 
-            <div className="flex items-center gap-3">
+          {/* Brand */}
+          <div>
 
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-red-800 shadow-lg shadow-red-900/30">
-                <Shield className="h-5 w-5 text-white" />
+            <div className="flex items-center gap-4">
+
+              <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-red-700 shadow-2xl shadow-red-900/40">
+
+                <Shield className="h-6 w-6 text-white" />
+
+                <div className="absolute inset-0 rounded-2xl border border-white/10" />
+
               </div>
 
               <div>
-                <h2 className="text-2xl font-black tracking-[0.25em] text-red-600">
+
+                <h2 className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-3xl font-black tracking-[0.3em] text-transparent">
                   RLHS
                 </h2>
 
-                <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
+                <p className="mt-1 text-xs uppercase tracking-[0.35em] text-zinc-500">
                   Bharat • Discipline • Future
                 </p>
+
               </div>
 
             </div>
 
-            <p className="mt-6 max-w-xl leading-relaxed text-zinc-400">
-              Rashtriya Laal Hit Sangh is a futuristic civic movement
-              focused on youth leadership, truth-driven discussions,
-              technological progress and Bharat 2047 vision.
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-zinc-400">
+              Rashtriya Laal Hit Sangh is a futuristic youth-driven movement
+              focused on truth, discipline, technology, leadership and Bharat’s
+              rise towards 2047.
             </p>
 
-            {/* Socials */}
-            <div className="mt-8 flex gap-4">
+            {/* Social */}
+            <div className="mt-10 flex flex-wrap gap-4">
 
               <a
                 href="#"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 transition hover:border-red-700 hover:bg-red-950/20"
+                className="group flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-orange-500/40 hover:bg-orange-500/10"
               >
-                <Instagram className="h-5 w-5 text-zinc-400" />
+                <Instagram className="h-5 w-5 text-zinc-400 transition group-hover:text-orange-400" />
               </a>
 
               <a
                 href="#"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 transition hover:border-red-700 hover:bg-red-950/20"
+                className="group flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-orange-500/40 hover:bg-orange-500/10"
               >
-                <Github className="h-5 w-5 text-zinc-400" />
+                <Github className="h-5 w-5 text-zinc-400 transition group-hover:text-orange-400" />
               </a>
 
               <a
                 href="#"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 transition hover:border-red-700 hover:bg-red-950/20"
+                className="group flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-orange-500/40 hover:bg-orange-500/10"
               >
-                <Globe className="h-5 w-5 text-zinc-400" />
+                <Globe className="h-5 w-5 text-zinc-400 transition group-hover:text-orange-400" />
               </a>
 
             </div>
@@ -70,39 +86,27 @@ export function Footer() {
           {/* Navigation */}
           <div>
 
-            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
+            <h3 className="text-sm font-bold uppercase tracking-[0.35em] text-orange-400">
               Navigation
             </h3>
 
-            <div className="mt-6 flex flex-col gap-4 text-sm text-zinc-400">
+            <div className="mt-8 flex flex-col gap-5">
 
-              <Link
-                to="/vision"
-                className="transition hover:text-red-500"
-              >
+              <FooterLink to="/vision">
                 Vision
-              </Link>
+              </FooterLink>
 
-              <Link
-                to="/forum"
-                className="transition hover:text-red-500"
-              >
+              <FooterLink to="/forum">
                 Forum
-              </Link>
+              </FooterLink>
 
-              <Link
-                to="/events"
-                className="transition hover:text-red-500"
-              >
+              <FooterLink to="/events">
                 Events
-              </Link>
+              </FooterLink>
 
-              <Link
-                to="/membership"
-                className="transition hover:text-red-500"
-              >
+              <FooterLink to="/membership">
                 Membership
-              </Link>
+              </FooterLink>
 
             </div>
 
@@ -111,27 +115,27 @@ export function Footer() {
           {/* Command */}
           <div>
 
-            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
-              Command
+            <h3 className="text-sm font-bold uppercase tracking-[0.35em] text-orange-400">
+              Core Principles
             </h3>
 
-            <div className="mt-6 flex flex-col gap-4 text-sm text-zinc-400">
+            <div className="mt-8 flex flex-col gap-5 text-zinc-400">
 
-              <span className="transition hover:text-red-500">
-                Code Of Conduct
-              </span>
+              <FooterText>
+                Truth Driven Ideology
+              </FooterText>
 
-              <span className="transition hover:text-red-500">
-                Moderation System
-              </span>
+              <FooterText>
+                Youth Leadership
+              </FooterText>
 
-              <span className="transition hover:text-red-500">
+              <FooterText>
                 Digital Discipline
-              </span>
+              </FooterText>
 
-              <span className="transition hover:text-red-500">
-                Bharat 2047
-              </span>
+              <FooterText>
+                Bharat 2047 Vision
+              </FooterText>
 
             </div>
 
@@ -140,13 +144,13 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-5 border-t border-zinc-900 pt-8 text-sm text-zinc-600 md:flex-row">
+        <div className="mt-20 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 md:flex-row">
 
-          <p>
+          <p className="text-sm text-zinc-600">
             © {new Date().getFullYear()} RLHS Platform • Built For Bharat
           </p>
 
-          <p className="uppercase tracking-[0.25em] text-zinc-700">
+          <p className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-sm font-semibold uppercase tracking-[0.35em] text-transparent">
             Truth • Discipline • Future
           </p>
 
@@ -155,5 +159,36 @@ export function Footer() {
       </div>
 
     </footer>
+  );
+}
+
+function FooterLink({
+  to,
+  children,
+}: {
+  to: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      to={to}
+      className="group flex items-center gap-2 text-sm text-zinc-400 transition hover:text-orange-400"
+    >
+      <ArrowUpRight className="h-4 w-4 opacity-0 transition group-hover:opacity-100" />
+
+      {children}
+    </Link>
+  );
+}
+
+function FooterText({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="text-sm transition hover:text-orange-400">
+      {children}
+    </div>
   );
 }
