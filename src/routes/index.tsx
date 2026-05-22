@@ -1,30 +1,46 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 export const Route = createFileRoute('/')({
   component: Home,
 })
 
 function Home() {
+  const { scrollY } = useScroll()
+
+  const y1 = useTransform(scrollY, [0, 1000], [0, 300])
+  const y2 = useTransform(scrollY, [0, 1000], [0, -200])
+  const opacity = useTransform(scrollY, [0, 500], [1, 0])
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
 
-      {/* Global Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,38,38,0.15),transparent_70%)]" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.12),transparent_70%)]" />
 
-      {/* Floating Glow Orbs */}
-      <div className="absolute left-[-10%] top-[-10%] h-[500px] w-[500px] rounded-full bg-red-900/20 blur-3xl animate-pulse" />
+      {/* Floating Orbs */}
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute left-[-10%] top-[5%] h-[650px] w-[650px] rounded-full bg-orange-500/20 blur-3xl"
+      />
 
-      <div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[500px] rounded-full bg-red-700/10 blur-3xl" />
+      <motion.div
+        style={{ y: y2 }}
+        className="absolute bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-red-700/20 blur-3xl"
+      />
 
       {/* Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      <motion.div
+        style={{ opacity }}
+        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px]"
+      />
 
       {/* Navbar */}
-      <header className="relative z-30 flex items-center justify-between border-b border-zinc-900/80 bg-black/40 px-6 py-5 backdrop-blur-xl">
+      <header className="relative z-50 flex items-center justify-between border-b border-zinc-900/70 bg-black/40 px-6 py-5 backdrop-blur-xl">
 
         <a
           href="/"
-          className="text-2xl font-black tracking-[0.3em] text-red-600"
+          className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-2xl font-black tracking-[0.35em] text-transparent"
         >
           RLHS
         </a>
@@ -33,173 +49,181 @@ function Home() {
 
           <a
             href="/vision"
-            className="transition hover:text-red-500"
+            className="transition hover:text-orange-400"
           >
             Vision
           </a>
 
           <a
             href="/forum"
-            className="transition hover:text-red-500"
+            className="transition hover:text-orange-400"
           >
             Forum
           </a>
 
           <a
             href="/events"
-            className="transition hover:text-red-500"
+            className="transition hover:text-orange-400"
           >
             Events
           </a>
 
           <a
             href="/membership"
-            className="transition hover:text-red-500"
+            className="transition hover:text-orange-400"
           >
             Membership
           </a>
 
         </nav>
 
-        <button className="rounded-xl bg-red-600 px-5 py-2 text-sm font-semibold transition hover:scale-105 hover:bg-red-700">
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2 text-sm font-semibold shadow-xl shadow-red-900/30"
+        >
           Join
-        </button>
+        </motion.button>
 
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-20 flex min-h-screen items-center justify-center overflow-hidden px-6 text-center">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center">
 
-        <div className="relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 80 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-20"
+        >
 
-          <p className="mb-4 text-sm uppercase tracking-[0.4em] text-red-500">
-            Bharat • Discipline • Future
+          <p className="mb-5 text-sm uppercase tracking-[0.5em] text-orange-400">
+            Bharat • Discipline • Civilization
           </p>
 
-          <h1 className="bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-6xl font-black tracking-tight text-transparent md:text-8xl">
+          <motion.h1
+            animate={{
+              backgroundPosition: ['0% 50%', '100% 50%'],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+            className="bg-[linear-gradient(to_right,#ffffff,#f97316,#dc2626,#ffffff)] bg-[length:200%_200%] bg-clip-text text-6xl font-black tracking-tight text-transparent md:text-8xl"
+          >
             Rashtriya Laal Hit Sangh
-          </h1>
+          </motion.h1>
 
-          <div className="mx-auto mt-5 h-1 w-32 rounded-full bg-red-600" />
+          <div className="mx-auto mt-6 h-1 w-40 rounded-full bg-gradient-to-r from-orange-500 to-red-600" />
 
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-zinc-400">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-zinc-400 md:text-xl">
             A futuristic nationalist youth movement focused on truth,
             discipline, technology, culture and Bharat 2047 vision.
           </p>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
+          <div className="mt-14 flex flex-wrap justify-center gap-5">
 
-            <button className="rounded-xl bg-red-600 px-8 py-4 font-semibold transition hover:scale-105 hover:bg-red-700">
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 font-semibold shadow-2xl shadow-red-900/40"
+            >
               Join Movement
-            </button>
+            </motion.button>
 
-            <button className="rounded-xl border border-zinc-700 px-8 py-4 font-semibold transition hover:border-red-500 hover:bg-zinc-900">
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-xl border border-orange-500/30 bg-black/40 px-8 py-4 font-semibold backdrop-blur-xl hover:border-orange-500"
+            >
               Explore Vision
-            </button>
+            </motion.button>
 
           </div>
 
-        </div>
+        </motion.div>
 
-        {/* Bottom Fade */}
         <div className="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-t from-black to-transparent" />
 
       </section>
 
-      {/* Stats Section */}
-      <section className="relative z-20 grid gap-6 px-6 pb-20 md:grid-cols-3">
+      {/* Stats */}
+      <section className="relative z-20 grid gap-6 px-6 pb-28 md:grid-cols-3">
 
-        <div className="group rounded-2xl border border-zinc-900 bg-zinc-950/50 p-8 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-red-900">
+        {[
+          ['2047', 'Bharat Vision Timeline'],
+          ['Youth', 'Digital Nationalist Community'],
+          ['Truth', 'Discussion Beyond Propaganda'],
+        ].map(([title, desc]) => (
 
-          <h2 className="text-4xl font-black text-red-600">
-            2047
-          </h2>
+          <motion.div
+            whileHover={{ y: -10 }}
+            key={title}
+            className="rounded-3xl border border-orange-500/10 bg-zinc-950/60 p-8 backdrop-blur-xl transition"
+          >
 
-          <p className="mt-3 text-zinc-400">
-            Bharat Vision Timeline
-          </p>
+            <h2 className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-5xl font-black text-transparent">
+              {title}
+            </h2>
 
-        </div>
+            <p className="mt-4 text-zinc-400">
+              {desc}
+            </p>
 
-        <div className="group rounded-2xl border border-zinc-900 bg-zinc-950/50 p-8 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-red-900">
+          </motion.div>
 
-          <h2 className="text-4xl font-black text-red-600">
-            Youth
-          </h2>
-
-          <p className="mt-3 text-zinc-400">
-            Digital Nationalist Community
-          </p>
-
-        </div>
-
-        <div className="group rounded-2xl border border-zinc-900 bg-zinc-950/50 p-8 backdrop-blur transition duration-300 hover:-translate-y-2 hover:border-red-900">
-
-          <h2 className="text-4xl font-black text-red-600">
-            Truth
-          </h2>
-
-          <p className="mt-3 text-zinc-400">
-            Discussion Beyond Propaganda
-          </p>
-
-        </div>
+        ))}
 
       </section>
 
-      {/* Ideology Section */}
+      {/* Ideology */}
       <section className="relative z-20 px-6 py-28">
 
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-7xl">
 
-          <p className="text-sm uppercase tracking-[0.3em] text-red-500">
+          <p className="text-sm uppercase tracking-[0.4em] text-orange-400">
             Core Ideology
           </p>
 
-          <h2 className="mt-4 text-4xl font-black md:text-6xl">
+          <h2 className="mt-5 text-5xl font-black md:text-7xl">
             Building Bharat’s Future
           </h2>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
 
-            <div className="rounded-2xl border border-zinc-900 bg-zinc-950/80 p-8 transition hover:border-red-900 hover:bg-zinc-900">
+            {[
+              {
+                title: 'Discipline',
+                desc: 'Structured youth-driven movement focused on leadership and national development.',
+              },
+              {
+                title: 'Technology',
+                desc: 'AI, innovation and futuristic systems empowering Bharat.',
+              },
+              {
+                title: 'Culture',
+                desc: 'Preserving civilization identity while embracing futuristic progress.',
+              },
+            ].map((item) => (
 
-              <h3 className="text-2xl font-bold text-red-500">
-                Discipline
-              </h3>
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                key={item.title}
+                className="rounded-3xl border border-zinc-800 bg-zinc-950/70 p-10 backdrop-blur-xl transition hover:border-orange-500/30"
+              >
 
-              <p className="mt-4 leading-relaxed text-zinc-400">
-                A structured youth-driven movement focused on responsibility,
-                national development and leadership.
-              </p>
+                <h3 className="text-3xl font-bold text-orange-400">
+                  {item.title}
+                </h3>
 
-            </div>
+                <p className="mt-5 leading-relaxed text-zinc-400">
+                  {item.desc}
+                </p>
 
-            <div className="rounded-2xl border border-zinc-900 bg-zinc-950/80 p-8 transition hover:border-red-900 hover:bg-zinc-900">
+              </motion.div>
 
-              <h3 className="text-2xl font-bold text-red-500">
-                Technology
-              </h3>
-
-              <p className="mt-4 leading-relaxed text-zinc-400">
-                Leveraging digital systems, innovation and AI to strengthen
-                Bharat’s future.
-              </p>
-
-            </div>
-
-            <div className="rounded-2xl border border-zinc-900 bg-zinc-950/80 p-8 transition hover:border-red-900 hover:bg-zinc-900">
-
-              <h3 className="text-2xl font-bold text-red-500">
-                Culture
-              </h3>
-
-              <p className="mt-4 leading-relaxed text-zinc-400">
-                Preserving civilizational identity while embracing futuristic
-                progress and unity.
-              </p>
-
-            </div>
+            ))}
 
           </div>
 
@@ -207,50 +231,46 @@ function Home() {
 
       </section>
 
-      {/* Vision Timeline */}
+      {/* Timeline */}
       <section className="relative z-20 px-6 py-28">
 
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-5xl">
 
-          <p className="text-sm uppercase tracking-[0.3em] text-red-500">
+          <p className="text-sm uppercase tracking-[0.4em] text-orange-400">
             Bharat 2047
           </p>
 
-          <h2 className="mt-4 text-4xl font-black md:text-6xl">
+          <h2 className="mt-5 text-5xl font-black md:text-7xl">
             National Vision Timeline
           </h2>
 
-          <div className="mt-16 space-y-8 border-l border-zinc-800 pl-8">
+          <div className="mt-20 border-l border-orange-500/20 pl-8 space-y-16">
 
-            <div>
-              <h3 className="text-2xl font-bold text-red-500">
-                2026
-              </h3>
+            {[
+              ['2026', 'Formation of disciplined digital youth network.'],
+              ['2030', 'Grassroots expansion and technological integration.'],
+              ['2047', 'Vishwaguru Bharat powered by disciplined citizens.'],
+            ].map(([year, text]) => (
 
-              <p className="mt-2 text-zinc-400">
-                Formation of disciplined digital youth network.
-              </p>
-            </div>
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                key={year}
+              >
 
-            <div>
-              <h3 className="text-2xl font-bold text-red-500">
-                2030
-              </h3>
+                <h3 className="text-4xl font-black text-orange-400">
+                  {year}
+                </h3>
 
-              <p className="mt-2 text-zinc-400">
-                Grassroots expansion and technology integration.
-              </p>
-            </div>
+                <p className="mt-3 text-lg text-zinc-400">
+                  {text}
+                </p>
 
-            <div>
-              <h3 className="text-2xl font-bold text-red-500">
-                2047
-              </h3>
+              </motion.div>
 
-              <p className="mt-2 text-zinc-400">
-                Vishwaguru Bharat powered by disciplined citizens.
-              </p>
-            </div>
+            ))}
 
           </div>
 
@@ -258,44 +278,51 @@ function Home() {
 
       </section>
 
-      {/* CTA Section */}
-      <section className="relative z-20 px-6 pb-24">
+      {/* CTA */}
+      <section className="relative z-20 px-6 pb-32">
 
-        <div className="mx-auto max-w-5xl rounded-3xl border border-red-950 bg-gradient-to-br from-zinc-950 to-black p-12 text-center shadow-2xl shadow-red-950/20">
+        <motion.div
+          whileHover={{ scale: 1.01 }}
+          className="mx-auto max-w-6xl rounded-[40px] border border-orange-500/10 bg-gradient-to-br from-zinc-950 to-black p-16 text-center shadow-2xl shadow-orange-900/10"
+        >
 
-          <p className="text-sm uppercase tracking-[0.3em] text-red-500">
+          <p className="text-sm uppercase tracking-[0.4em] text-orange-400">
             Join The Movement
           </p>
 
-          <h2 className="mt-5 text-4xl font-black md:text-6xl">
+          <h2 className="mt-6 text-5xl font-black md:text-7xl">
             Bharat Needs Builders.
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
+          <p className="mx-auto mt-8 max-w-3xl text-xl text-zinc-400">
             Become part of a disciplined digital community dedicated to truth,
-            development and Bharat 2047.
+            technology, culture and Bharat 2047.
           </p>
 
-          <button className="mt-10 rounded-xl bg-red-600 px-8 py-4 font-semibold transition hover:scale-105 hover:bg-red-700">
+          <motion.button
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-12 rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 px-10 py-5 text-lg font-bold shadow-2xl shadow-red-900/40"
+          >
             Become A Member
-          </button>
+          </motion.button>
 
-        </div>
+        </motion.div>
 
       </section>
 
       {/* Footer */}
-      <footer className="relative z-20 border-t border-zinc-900 bg-black/70 px-6 py-14 backdrop-blur">
+      <footer className="relative z-20 border-t border-zinc-900 bg-black/60 px-6 py-16 backdrop-blur-xl">
 
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-4">
 
           <div>
 
-            <h2 className="text-2xl font-black tracking-[0.3em] text-red-600">
+            <h2 className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-3xl font-black tracking-[0.3em] text-transparent">
               RLHS
             </h2>
 
-            <p className="mt-4 text-sm leading-relaxed text-zinc-500">
+            <p className="mt-5 text-sm leading-relaxed text-zinc-500">
               Truth • Discipline • Bharat 2047
             </p>
 
@@ -303,25 +330,25 @@ function Home() {
 
           <div>
 
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white">
+            <h3 className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-white">
               Navigation
             </h3>
 
             <div className="space-y-3 text-zinc-400">
 
-              <a href="/vision" className="block hover:text-red-500">
+              <a href="/vision" className="block hover:text-orange-400">
                 Vision
               </a>
 
-              <a href="/forum" className="block hover:text-red-500">
+              <a href="/forum" className="block hover:text-orange-400">
                 Forum
               </a>
 
-              <a href="/events" className="block hover:text-red-500">
+              <a href="/events" className="block hover:text-orange-400">
                 Events
               </a>
 
-              <a href="/membership" className="block hover:text-red-500">
+              <a href="/membership" className="block hover:text-orange-400">
                 Membership
               </a>
 
@@ -331,7 +358,7 @@ function Home() {
 
           <div>
 
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white">
+            <h3 className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-white">
               Movement
             </h3>
 
@@ -348,7 +375,7 @@ function Home() {
 
           <div>
 
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-white">
+            <h3 className="mb-5 text-sm font-bold uppercase tracking-[0.2em] text-white">
               Connect
             </h3>
 
@@ -365,7 +392,7 @@ function Home() {
 
         </div>
 
-        <div className="mt-12 border-t border-zinc-900 pt-6 text-center text-xs text-zinc-600">
+        <div className="mt-14 border-t border-zinc-900 pt-6 text-center text-xs text-zinc-600">
           © 2026 RLHS Platform • Built For Bharat
         </div>
 
