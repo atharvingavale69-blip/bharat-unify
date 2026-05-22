@@ -81,24 +81,7 @@ function Home() {
       </div>
 
       {/* NAVBAR */}
-      <header className="relative z-50 flex items-center justify-between border-b border-zinc-900/70 bg-black/40 px-6 py-5 backdrop-blur-xl">
-
-        <a
-          href="/"
-          className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-2xl font-black tracking-[0.35em] text-transparent"
-        >
-          RLHS
-        </a>
-
-        {/* Desktop Nav */}
-        <nav className="hidden gap-8 text-sm font-medium text-zinc-400 md:flex">
-          {navItems.map((item) => (
-            <a key={item.name} href={item.href} className="hover:text-orange-400">
-              {item.name}
-            </a>
-          ))}
-        </nav>
-
+    
         {/* Mobile Button */}
         <button
           onClick={() => setMenuOpen(true)}
