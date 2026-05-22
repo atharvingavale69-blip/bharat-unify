@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
@@ -125,35 +125,67 @@ function Home() {
               repeat: Infinity,
               ease: 'linear',
             }}
-            className="bg-[linear-gradient(to_right,#ffffff,#f97316,#dc2626,#ffffff)] bg-[length:200%_200%] bg-clip-text text-6xl font-black text-transparent md:text-8xl"
+            className="bg-[linear-gradient(to_right,#ffffff,#f97316,#dc2626,#ffffff)] bg-[length:200%_200%] bg-clip-text text-5xl font-black text-transparent sm:text-6xl md:text-8xl"
           >
             Rashtriya Laal Hit Sangh
           </motion.h1>
 
           <div className="mx-auto mt-6 h-1 w-40 rounded-full bg-gradient-to-r from-orange-500 to-red-600" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-zinc-400 md:text-xl">
+          <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-400 sm:text-lg md:text-xl">
             A futuristic nationalist youth movement focused on truth,
             discipline, technology, culture and Bharat 2047 vision.
           </p>
 
           <div className="mt-14 flex flex-wrap justify-center gap-5">
 
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 font-semibold shadow-2xl shadow-red-900/40"
-            >
-              Join Movement
-            </motion.button>
+            {/* JOIN MOVEMENT */}
+            <Link to="/join">
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 font-semibold shadow-2xl shadow-red-900/40"
+              >
+                Join Movement
+              </motion.button>
+            </Link>
 
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="rounded-xl border border-orange-500/30 bg-black/40 px-8 py-4 font-semibold backdrop-blur-xl hover:border-orange-500"
+            {/* EXPLORE VISION */}
+            <Link to="/vision">
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                className="rounded-xl border border-orange-500/30 bg-black/40 px-8 py-4 font-semibold backdrop-blur-xl transition hover:border-orange-500"
+              >
+                Explore Vision
+              </motion.button>
+            </Link>
+
+          </div>
+
+          {/* Quick Navigation */}
+          <div className="mt-16 flex flex-wrap justify-center gap-4">
+
+            <Link
+              to="/forum"
+              className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm text-zinc-300 backdrop-blur-xl transition hover:border-orange-500 hover:text-orange-400"
             >
-              Explore Vision
-            </motion.button>
+              Forum
+            </Link>
+
+            <Link
+              to="/events"
+              className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm text-zinc-300 backdrop-blur-xl transition hover:border-orange-500 hover:text-orange-400"
+            >
+              Events
+            </Link>
+
+            <Link
+              to="/membership"
+              className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm text-zinc-300 backdrop-blur-xl transition hover:border-orange-500 hover:text-orange-400"
+            >
+              Membership
+            </Link>
 
           </div>
 
