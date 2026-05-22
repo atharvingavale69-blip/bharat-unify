@@ -13,15 +13,8 @@ function Home() {
   const y2 = useTransform(scrollY, [0, 1000], [0, -200])
   const opacity = useTransform(scrollY, [0, 500], [1, 0])
 
-  const [embers, setEmbers] = useState<
-    {
-      id: number
-      left: number
-      size: number
-      delay: number
-      duration: number
-    }[]
-  >([])
+  const [embers, setEmbers] = useState<any[]>([])
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const generated = Array.from({ length: 45 }).map((_, i) => ({
@@ -31,9 +24,15 @@ function Home() {
       delay: Math.random() * 5,
       duration: Math.random() * 10 + 8,
     }))
-
     setEmbers(generated)
   }, [])
+
+  const navItems = [
+    { name: 'Vision', href: '/vision' },
+    { name: 'Forum', href: '/forum' },
+    { name: 'Events', href: '/events' },
+    { name: 'Membership', href: '/membership' },
+  ]
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
@@ -43,15 +42,8 @@ function Home() {
       <div className="absolute inset-0 bg-gradient-to-b from-orange-950/20 via-transparent to-red-950/20" />
 
       {/* Floating Orbs */}
-      <motion.div
-        style={{ y: y1 }}
-        className="absolute left-[-10%] top-[5%] h-[650px] w-[650px] rounded-full bg-orange-500/20 blur-3xl"
-      />
-
-      <motion.div
-        style={{ y: y2 }}
-        className="absolute bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-red-700/20 blur-3xl"
-      />
+      <motion.div style={{ y: y1 }} className="absolute left-[-10%] top-[5%] h-[650px] w-[650px] rounded-full bg-orange-500/20 blur-3xl" />
+      <motion.div style={{ y: y2 }} className="absolute bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-red-700/20 blur-3xl" />
 
       {/* Grid */}
       <motion.div
@@ -88,7 +80,7 @@ function Home() {
         ))}
       </div>
 
-      {/* Navbar */}
+      {/* NAVBAR */}
       <header className="relative z-50 flex items-center justify-between border-b border-zinc-900/70 bg-black/40 px-6 py-5 backdrop-blur-xl">
 
         <a
@@ -98,24 +90,68 @@ function Home() {
           RLHS
         </a>
 
+        {/* Desktop Nav */}
         <nav className="hidden gap-8 text-sm font-medium text-zinc-400 md:flex">
-          <a href="/vision" className="hover:text-orange-400">Vision</a>
-          <a href="/forum" className="hover:text-orange-400">Forum</a>
-          <a href="/events" className="hover:text-orange-400">Events</a>
-          <a href="/membership" className="hover:text-orange-400">Membership</a>
+          {navItems.map((item) => (
+            <a key={item.name} href={item.href} className="hover:text-orange-400">
+              {item.name}
+            </a>
+          ))}
         </nav>
 
+        {/* Mobile Button */}
+        <button
+          onClick={() => setMenuOpen(true)}
+          className="md:hidden rounded-lg border border-white/10 px-3 py-2 text-sm"
+        >
+          ☰
+        </button>
+
+        {/* Desktop Join */}
         <motion.button
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
-          className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2 text-sm font-semibold shadow-xl shadow-red-900/30"
+          className="hidden md:block rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2 text-sm font-semibold shadow-xl shadow-red-900/30"
         >
           Join
         </motion.button>
-
       </header>
 
-      {/* Hero */}
+      {/* MOBILE MENU */}
+      {menuOpen && (
+        <motion.div
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '100%' }}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl"
+        >
+
+          <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+            <span className="text-xl font-bold text-orange-400">Menu</span>
+            <button onClick={() => setMenuOpen(false)} className="text-xl">
+              ✕
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-6 px-8 py-10 text-lg">
+
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="hover:text-orange-400"
+              >
+                {item.name}
+              </a>
+            ))}
+
+          </div>
+
+        </motion.div>
+      )}
+
+      {/* HERO */}
       <section className="relative flex min-h-screen items-center justify-center px-6 text-center">
 
         <motion.div
@@ -141,23 +177,6 @@ function Home() {
             A futuristic nationalist youth movement focused on truth, discipline, technology, culture and Bharat 2047 vision.
           </p>
 
-          <div className="mt-14 flex justify-center gap-5">
-
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 font-semibold"
-            >
-              Join Movement
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              className="rounded-xl border border-orange-500/30 bg-black/40 px-8 py-4 font-semibold"
-            >
-              Explore Vision
-            </motion.button>
-
-          </div>
         </motion.div>
 
       </section>
