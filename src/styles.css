@@ -4,95 +4,82 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * RLHS — Bharat Command Design System
- * Matte black + crimson, futuristic-Bharat, military precision.
- * All colors in oklch. Use semantic tokens only.
- */
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-crimson: var(--crimson);
-  --color-crimson-glow: var(--crimson-glow);
+
   --color-saffron: var(--saffron);
-  --color-ink: var(--ink);
-  --color-steel: var(--steel);
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --shadow-elevated: 0 30px 60px -20px oklch(0 0 0 / 0.6),
-    0 0 0 1px oklch(1 0 0 / 0.04);
-  --shadow-crimson: 0 0 40px -8px oklch(0.55 0.22 25 / 0.45);
-  --gradient-crimson: linear-gradient(
-    135deg,
-    oklch(0.55 0.22 25),
-    oklch(0.42 0.2 22)
-  );
-  --gradient-noir: linear-gradient(
-    180deg,
-    oklch(0.12 0.01 20),
-    oklch(0.06 0.005 20)
-  );
+  --color-saffron-light: var(--saffron-light);
+  --color-saffron-dark: var(--saffron-dark);
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --shadow-glow:
+    0 0 25px rgba(255, 119, 0, 0.25),
+    0 0 60px rgba(255, 119, 0, 0.15);
+
+  --shadow-card:
+    0 10px 30px rgba(0,0,0,0.5);
+
+  --gradient-main:
+    linear-gradient(
+      135deg,
+      rgba(255,115,0,0.25),
+      rgba(255,153,0,0.08)
+    );
+
+  --gradient-dark:
+    linear-gradient(
+      180deg,
+      #090909,
+      #050505
+    );
 }
 
 :root,
 .dark {
-  --radius: 0.5rem;
+  --radius: 0.9rem;
 
-  /* Surface — matte ink */
-  --background: oklch(0.08 0.006 20);
-  --foreground: oklch(0.96 0.005 20);
-  --ink: oklch(0.05 0.005 20);
-  --steel: oklch(0.18 0.008 20);
+  --background: #050505;
+  --foreground: #f5f5f5;
 
-  --card: oklch(0.11 0.008 20);
-  --card-foreground: oklch(0.96 0.005 20);
-  --popover: oklch(0.13 0.008 20);
-  --popover-foreground: oklch(0.96 0.005 20);
+  --card: rgba(18,18,18,0.75);
+  --card-foreground: #ffffff;
 
-  /* Primary — crimson */
-  --crimson: oklch(0.55 0.22 25);
-  --crimson-glow: oklch(0.68 0.24 28);
-  --saffron: oklch(0.78 0.17 60);
+  --border: rgba(255,255,255,0.08);
 
-  --primary: oklch(0.55 0.22 25);
-  --primary-foreground: oklch(0.98 0.005 20);
-  --secondary: oklch(0.16 0.008 20);
-  --secondary-foreground: oklch(0.96 0.005 20);
-  --muted: oklch(0.14 0.008 20);
-  --muted-foreground: oklch(0.62 0.015 20);
-  --accent: oklch(0.2 0.012 25);
-  --accent-foreground: oklch(0.96 0.005 20);
-  --destructive: oklch(0.6 0.24 27);
-  --destructive-foreground: oklch(0.98 0.005 20);
+  --primary: #ff7a00;
+  --primary-foreground: #ffffff;
 
-  --border: oklch(1 0 0 / 0.08);
-  --input: oklch(1 0 0 / 0.1);
-  --ring: oklch(0.55 0.22 25);
+  --muted: #101010;
+  --muted-foreground: #9d9d9d;
+
+  --accent: #141414;
+  --accent-foreground: #ffffff;
+
+  --saffron: #ff7a00;
+  --saffron-light: #ff9a1f;
+  --saffron-dark: #ff5500;
 }
 
 @layer base {
@@ -101,44 +88,179 @@
   }
 
   html {
+    scroll-behavior: smooth;
     color-scheme: dark;
   }
 
   body {
-    background-color: var(--color-background);
+    overflow-x: hidden;
+    background:
+      radial-gradient(
+        circle at top,
+        rgba(255,115,0,0.12),
+        transparent 35%
+      ),
+      linear-gradient(
+        180deg,
+        #080808,
+        #030303
+      );
+
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
     background-image:
-      radial-gradient(
-        ellipse 80% 50% at 50% -10%,
-        oklch(0.55 0.22 25 / 0.12),
-        transparent 70%
+      linear-gradient(
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px
       ),
-      linear-gradient(180deg, oklch(0.08 0.006 20), oklch(0.05 0.005 20));
-    background-attachment: fixed;
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px
+      );
+
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: -1;
+    animation: gridMove 20s linear infinite;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(255,115,0,0.12),
+        transparent 20%
+      ),
+      radial-gradient(
+        circle at 80% 30%,
+        rgba(255,140,0,0.10),
+        transparent 20%
+      ),
+      radial-gradient(
+        circle at 50% 80%,
+        rgba(255,90,0,0.08),
+        transparent 20%
+      );
+
+    filter: blur(80px);
+    z-index: -2;
+    animation: pulseGlow 10s ease-in-out infinite alternate;
   }
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background: rgba(255,115,0,0.35);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      180deg,
+      #ff7a00,
+      #ff5500
+    );
+    border-radius: 999px;
   }
 }
 
 @layer utilities {
-  .grid-lines {
+
+  .glass-card {
+    background: rgba(15,15,15,0.72);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: var(--shadow-card);
+  }
+
+  .glow-saffron {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      90deg,
+      #ff7a00,
+      #ffb347
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 999px;
+    background: rgba(255,115,0,0.18);
+    filter: blur(120px);
+    animation: pulseGlow 6s ease-in-out infinite alternate;
+  }
+
+  .parallax-slow {
+    transform: translateZ(-1px) scale(1.2);
+  }
+
+  .parallax-fast {
+    transform: translateZ(-2px) scale(2);
+  }
+
+  .border-glow {
+    border: 1px solid rgba(255,140,0,0.25);
+  }
+
+  .bg-noise {
     background-image:
-      linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
-    background-size: 64px 64px;
+      url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+    opacity: 0.18;
   }
-  .text-balance {
-    text-wrap: balance;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
   }
-  .glow-crimson {
-    box-shadow: var(--shadow-crimson);
+
+  100% {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(60px);
   }
 }
