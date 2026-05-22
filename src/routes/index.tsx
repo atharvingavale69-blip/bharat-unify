@@ -12,7 +12,6 @@ function Home() {
   const y1 = useTransform(scrollY, [0, 1000], [0, 300])
   const y2 = useTransform(scrollY, [0, 1000], [0, -200])
   const opacity = useTransform(scrollY, [0, 500], [1, 0])
-  const embers = Array.from({ length: 25 })
 
   const [embers, setEmbers] = useState<
     {
@@ -41,21 +40,31 @@ function Home() {
 
       {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.12),transparent_70%)]" />
-
-      {/* Fire Glow Layer */}
       <div className="absolute inset-0 bg-gradient-to-b from-orange-950/20 via-transparent to-red-950/20" />
 
-      {/* Animated Embers */}
+      {/* Floating Orbs */}
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute left-[-10%] top-[5%] h-[650px] w-[650px] rounded-full bg-orange-500/20 blur-3xl"
+      />
+
+      <motion.div
+        style={{ y: y2 }}
+        className="absolute bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-red-700/20 blur-3xl"
+      />
+
+      {/* Grid */}
+      <motion.div
+        style={{ opacity }}
+        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px]"
+      />
+
+      {/* Embers */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-
         {embers.map((ember) => (
-
           <motion.div
             key={ember.id}
-            initial={{
-              y: 900,
-              opacity: 0,
-            }}
+            initial={{ y: 900, opacity: 0 }}
             animate={{
               y: -200,
               opacity: [0, 1, 0],
@@ -76,76 +85,8 @@ function Home() {
               boxShadow: '0 0 12px rgba(251,146,60,0.8)',
             }}
           />
-
         ))}
-
       </div>
-
-      {/* Fire Smoke Glow */}
-      <motion.div
-        animate={{
-          opacity: [0.3, 0.6, 0.3],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute bottom-[-20%] left-1/2 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-orange-600/10 blur-3xl"
-      />
-
-      {/* Floating Orbs */}
-      <motion.div
-        style={{ y: y1 }}
-        className="absolute left-[-10%] top-[5%] h-[650px] w-[650px] rounded-full bg-orange-500/20 blur-3xl"
-      />
-
-      <motion.div
-        style={{ y: y2 }}
-        className="absolute bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-red-700/20 blur-3xl"
-      />
-
-      {/* Grid Overlay */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px]"
-      />
-     
-      {/* Fire Embers Animation */}
-<div className="pointer-events-none absolute inset-0 overflow-hidden">
-
-  {embers.map((_, i) => (
-
-    <motion.span
-      key={i}
-      initial={{
-        opacity: 0,
-        y: 0,
-        x: Math.random() * 1600,
-        scale: Math.random() * 0.6 + 0.4,
-      }}
-      animate={{
-        opacity: [0, 1, 0],
-        y: -1200,
-        x: [
-          Math.random() * 50,
-          Math.random() * -50,
-          Math.random() * 50,
-        ],
-      }}
-      transition={{
-        duration: Math.random() * 8 + 6,
-        repeat: Infinity,
-        delay: Math.random() * 5,
-        ease: 'linear',
-      }}
-      className="absolute bottom-[-50px] h-2 w-2 rounded-full bg-orange-500 shadow-[0_0_20px_rgba(249,115,22,0.9)]"
-    />
-
-  ))}
-
-</div>
 
       {/* Navbar */}
       <header className="relative z-50 flex items-center justify-between border-b border-zinc-900/70 bg-black/40 px-6 py-5 backdrop-blur-xl">
@@ -158,35 +99,10 @@ function Home() {
         </a>
 
         <nav className="hidden gap-8 text-sm font-medium text-zinc-400 md:flex">
-
-          <a
-            href="/vision"
-            className="transition hover:text-orange-400"
-          >
-            Vision
-          </a>
-
-          <a
-            href="/forum"
-            className="transition hover:text-orange-400"
-          >
-            Forum
-          </a>
-
-          <a
-            href="/events"
-            className="transition hover:text-orange-400"
-          >
-            Events
-          </a>
-
-          <a
-            href="/membership"
-            className="transition hover:text-orange-400"
-          >
-            Membership
-          </a>
-
+          <a href="/vision" className="hover:text-orange-400">Vision</a>
+          <a href="/forum" className="hover:text-orange-400">Forum</a>
+          <a href="/events" className="hover:text-orange-400">Events</a>
+          <a href="/membership" className="hover:text-orange-400">Membership</a>
         </nav>
 
         <motion.button
@@ -199,64 +115,50 @@ function Home() {
 
       </header>
 
-      {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center">
+      {/* Hero */}
+      <section className="relative flex min-h-screen items-center justify-center px-6 text-center">
 
         <motion.div
           initial={{ opacity: 0, y: 80 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="relative z-20"
         >
-
           <p className="mb-5 text-sm uppercase tracking-[0.5em] text-orange-400">
             Bharat • Discipline • Civilization
           </p>
 
           <motion.h1
-            animate={{
-              backgroundPosition: ['0% 50%', '100% 50%'],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="bg-[linear-gradient(to_right,#ffffff,#f97316,#dc2626,#ffffff)] bg-[length:200%_200%] bg-clip-text text-6xl font-black tracking-tight text-transparent md:text-8xl"
+            animate={{ backgroundPosition: ['0% 50%', '100% 50%'] }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className="bg-[linear-gradient(to_right,#ffffff,#f97316,#dc2626,#ffffff)] bg-[length:200%_200%] bg-clip-text text-6xl font-black text-transparent md:text-8xl"
           >
             Rashtriya Laal Hit Sangh
           </motion.h1>
 
-          <div className="mx-auto mt-6 h-1 w-40 rounded-full bg-gradient-to-r from-orange-500 to-red-600" />
+          <div className="mx-auto mt-6 h-1 w-40 bg-gradient-to-r from-orange-500 to-red-600" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-zinc-400 md:text-xl">
-            A futuristic nationalist youth movement focused on truth,
-            discipline, technology, culture and Bharat 2047 vision.
+          <p className="mx-auto mt-8 max-w-3xl text-lg text-zinc-400">
+            A futuristic nationalist youth movement focused on truth, discipline, technology, culture and Bharat 2047 vision.
           </p>
 
-          <div className="mt-14 flex flex-wrap justify-center gap-5">
+          <div className="mt-14 flex justify-center gap-5">
 
             <motion.button
               whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 font-semibold shadow-2xl shadow-red-900/40"
+              className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-8 py-4 font-semibold"
             >
               Join Movement
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="rounded-xl border border-orange-500/30 bg-black/40 px-8 py-4 font-semibold backdrop-blur-xl hover:border-orange-500"
+              className="rounded-xl border border-orange-500/30 bg-black/40 px-8 py-4 font-semibold"
             >
               Explore Vision
             </motion.button>
 
           </div>
-
         </motion.div>
-
-        <div className="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-t from-black to-transparent" />
 
       </section>
 
