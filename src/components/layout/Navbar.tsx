@@ -54,16 +54,18 @@ export function Navbar() {
           <div className="flex items-center gap-3">
 
             {/* Join Button */}
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="hidden rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2 text-sm font-semibold shadow-xl shadow-red-900/30 md:block"
-            >
-              <div className="flex items-center gap-2">
-                Join
-                <ChevronRight className="h-4 w-4" />
-              </div>
-            </motion.button>
+            <Link to="/join">
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                className="hidden rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2 text-sm font-semibold shadow-xl shadow-red-900/30 md:block"
+              >
+                <div className="flex items-center gap-2">
+                  Join
+                  <ChevronRight className="h-4 w-4" />
+                </div>
+              </motion.button>
+            </Link>
 
             {/* Mobile Menu Button */}
             <button
@@ -122,12 +124,17 @@ export function Navbar() {
               ))}
 
               {/* Join Button */}
-              <motion.button
-                whileTap={{ scale: 0.96 }}
-                className="mt-4 rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 px-6 py-5 text-lg font-bold text-white shadow-2xl shadow-red-900/40"
+              <Link
+                to="/join"
+                onClick={() => setMenuOpen(false)}
               >
-                Join Movement
-              </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
+                  className="mt-4 w-full rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 px-6 py-5 text-lg font-bold text-white shadow-2xl shadow-red-900/40"
+                >
+                  Join Movement
+                </motion.button>
+              </Link>
 
             </div>
 
