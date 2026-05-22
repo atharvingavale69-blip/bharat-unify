@@ -40,10 +40,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
-      {/* GLOBAL NAVBAR */}
       <Navbar />
-
-      {/* PAGE CONTENT */}
       <div className="pt-20">
         <Outlet />
       </div>
