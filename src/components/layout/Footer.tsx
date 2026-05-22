@@ -1,48 +1,159 @@
 import { Link } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
-import { Shield } from "lucide-react";
+import { Shield, Instagram, Github, Globe } from "lucide-react";
 
 export function Footer() {
-  const { t } = useTranslation();
   return (
-    <footer className="border-t border-border/60 mt-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-10 md:grid-cols-4">
-        <div className="md:col-span-2">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-crimson to-crimson-glow">
-              <Shield className="h-4 w-4 text-primary-foreground" strokeWidth={2.5} />
-            </span>
-            <span className="font-display text-lg font-bold">{t("brand")}</span>
+    <footer className="relative mt-32 overflow-hidden border-t border-zinc-900 bg-black">
+
+      {/* Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(220,38,38,0.12),transparent_70%)]" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
+
+        <div className="grid gap-14 md:grid-cols-4">
+
+          {/* Branding */}
+          <div className="md:col-span-2">
+
+            <div className="flex items-center gap-3">
+
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-red-800 shadow-lg shadow-red-900/30">
+                <Shield className="h-5 w-5 text-white" />
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-black tracking-[0.25em] text-red-600">
+                  RLHS
+                </h2>
+
+                <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
+                  Bharat • Discipline • Future
+                </p>
+              </div>
+
+            </div>
+
+            <p className="mt-6 max-w-xl leading-relaxed text-zinc-400">
+              Rashtriya Laal Hit Sangh is a futuristic civic movement
+              focused on youth leadership, truth-driven discussions,
+              technological progress and Bharat 2047 vision.
+            </p>
+
+            {/* Socials */}
+            <div className="mt-8 flex gap-4">
+
+              <a
+                href="#"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 transition hover:border-red-700 hover:bg-red-950/20"
+              >
+                <Instagram className="h-5 w-5 text-zinc-400" />
+              </a>
+
+              <a
+                href="#"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 transition hover:border-red-700 hover:bg-red-950/20"
+              >
+                <Github className="h-5 w-5 text-zinc-400" />
+              </a>
+
+              <a
+                href="#"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 transition hover:border-red-700 hover:bg-red-950/20"
+              >
+                <Globe className="h-5 w-5 text-zinc-400" />
+              </a>
+
+            </div>
+
           </div>
-          <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            {t("tagline")}. A disciplined civic platform for the citizens of Bharat.
+
+          {/* Navigation */}
+          <div>
+
+            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
+              Navigation
+            </h3>
+
+            <div className="mt-6 flex flex-col gap-4 text-sm text-zinc-400">
+
+              <Link
+                to="/vision"
+                className="transition hover:text-red-500"
+              >
+                Vision
+              </Link>
+
+              <Link
+                to="/forum"
+                className="transition hover:text-red-500"
+              >
+                Forum
+              </Link>
+
+              <Link
+                to="/events"
+                className="transition hover:text-red-500"
+              >
+                Events
+              </Link>
+
+              <Link
+                to="/membership"
+                className="transition hover:text-red-500"
+              >
+                Membership
+              </Link>
+
+            </div>
+
+          </div>
+
+          {/* Command */}
+          <div>
+
+            <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-red-500">
+              Command
+            </h3>
+
+            <div className="mt-6 flex flex-col gap-4 text-sm text-zinc-400">
+
+              <span className="transition hover:text-red-500">
+                Code Of Conduct
+              </span>
+
+              <span className="transition hover:text-red-500">
+                Moderation System
+              </span>
+
+              <span className="transition hover:text-red-500">
+                Digital Discipline
+              </span>
+
+              <span className="transition hover:text-red-500">
+                Bharat 2047
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-16 flex flex-col items-center justify-between gap-5 border-t border-zinc-900 pt-8 text-sm text-zinc-600 md:flex-row">
+
+          <p>
+            © {new Date().getFullYear()} RLHS Platform • Built For Bharat
           </p>
+
+          <p className="uppercase tracking-[0.25em] text-zinc-700">
+            Truth • Discipline • Future
+          </p>
+
         </div>
-        <div>
-          <h4 className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-3">
-            Platform
-          </h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/forum" className="hover:text-crimson">Forum</Link></li>
-            <li><Link to="/auth" className="hover:text-crimson">Join</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-3">
-            Conduct
-          </h4>
-          <ul className="space-y-2 text-sm">
-            <li><span className="text-muted-foreground">Code of conduct</span></li>
-            <li><span className="text-muted-foreground">Moderation log</span></li>
-          </ul>
-        </div>
+
       </div>
-      <div className="border-t border-border/40">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between text-xs text-muted-foreground font-mono">
-          <span>© {new Date().getFullYear()} RLHS</span>
-          <span>{t("footer.rights")}</span>
-        </div>
-      </div>
+
     </footer>
   );
 }
