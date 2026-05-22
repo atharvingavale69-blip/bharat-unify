@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { Navbar } from "@/components/layout/Navbar";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -28,7 +29,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
 
-      <body>
+      <body className="bg-black text-white">
         {children}
         <Scripts />
       </body>
@@ -37,5 +38,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      {/* GLOBAL NAVBAR */}
+      <Navbar />
+
+      {/* PAGE CONTENT */}
+      <div className="pt-20">
+        <Outlet />
+      </div>
+    </>
+  );
 }
