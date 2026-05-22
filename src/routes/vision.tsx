@@ -31,11 +31,12 @@ function Vision() {
       delay: Math.random() * 4,
       duration: Math.random() * 8 + 6,
     }))
+
     setEmbers(generated)
   }, [])
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-black text-white">
+    <main className="relative min-h-screen overflow-hidden bg-black pt-24 text-white">
 
       {/* Ambient Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.15),transparent_60%)]" />
@@ -87,32 +88,6 @@ function Vision() {
         ))}
       </div>
 
-      {/* NAVBAR */}
-      <header className="relative z-50 flex items-center justify-between border-b border-white/5 bg-black/50 px-6 py-5 backdrop-blur-xl">
-
-        <a
-          href="/"
-          className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-2xl font-black tracking-[0.35em] text-transparent"
-        >
-          RLHS
-        </a>
-
-        <nav className="hidden gap-8 text-sm text-zinc-400 md:flex">
-          <a className="hover:text-orange-400 transition" href="/vision">Vision</a>
-          <a className="hover:text-orange-400 transition" href="/forum">Forum</a>
-          <a className="hover:text-orange-400 transition" href="/events">Events</a>
-          <a className="hover:text-orange-400 transition" href="/membership">Membership</a>
-        </nav>
-
-        <motion.button
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          className="rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-5 py-2 text-sm font-semibold shadow-lg shadow-red-900/30"
-        >
-          Join
-        </motion.button>
-      </header>
-
       {/* HERO */}
       <section className="relative flex min-h-screen items-center justify-center px-6 text-center">
 
@@ -159,6 +134,7 @@ function Vision() {
                 <h3 className="text-xl font-bold text-orange-400">
                   {item.title}
                 </h3>
+
                 <p className="mt-2 text-sm text-zinc-400">
                   {item.desc}
                 </p>
